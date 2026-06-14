@@ -14,6 +14,15 @@ This project is designed for the Microsoft Agents League Hackathon 2026, Reasoni
 - Explainable enforcement decisions
 - Audit trail and rollback support
 
+<img width="1328" height="618" alt="Screenshot 2026-06-14 123015" src="https://github.com/user-attachments/assets/41a1066e-e501-42c4-a198-50ed37507224" />
+
+<img width="1312" height="600" alt="Screenshot 2026-06-14 123105" src="https://github.com/user-attachments/assets/c35e3951-702c-4bf6-b15a-191c0d51c5b7" />
+
+<img width="640" height="626" alt="Screenshot 2026-06-14 123304" src="https://github.com/user-attachments/assets/1be1ffa6-66a5-46e5-93ae-154a2411d944" />
+
+<img width="637" height="607" alt="Screenshot 2026-06-14 123330" src="https://github.com/user-attachments/assets/8686630d-d26d-4746-aac1-16999d3187a4" />
+
+
 ## Innovation Highlights
 
 ### Multi-Agent Governance
