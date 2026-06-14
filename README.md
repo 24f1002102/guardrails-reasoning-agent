@@ -1,7 +1,7 @@
 # Social Media Guardrails Reasoning Agent
 
 Social Media Guardrails Committee is a multi-agent governance system that helps platforms make transparent, policy-grounded moderation decisions.
-Instead of asking only whether content is harmful, the system determines the least restrictive effective intervention by combining content analysis, amplification risk assessment, coordination detection, policy retrieval, governance deliberation, and auditable enforcement. An agentic safety layer for social media platforms. It assesses unsafe amplification risk, simulates coordinated behavior, retrieves policy evidence through a Foundry IQ style knowledge layer, deliberates over alternative actions, and applies the least restrictive effective guardrail with citations and an audit trail.
+Instead of asking only whether content is harmful, the system determines the least restrictive effective intervention by combining content analysis, amplification risk assessment, coordination detection, policy retrieval, governance deliberation, and auditable enforcement.
 
 This project is designed for the Microsoft Agents League Hackathon 2026, Reasoning Agents track.
 
@@ -16,14 +16,6 @@ The platform prioritizes proportionate interventions such as context labels, sou
 ### Explainable Governance
 Every recommendation includes supporting evidence, alternative actions considered, and a complete audit trail for review and rollback.
 
-Official Microsoft references used for alignment:
-
-- Foundry IQ overview: https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/what-is-foundry-iq?view=foundry
-- Foundry IQ FAQ: https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/foundry-iq-faq?view=foundry
-- Microsoft Foundry Agent Service: https://learn.microsoft.com/azure/ai-foundry/agents/overview
-- Azure AI Content Safety overview: https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview
-- Microsoft Responsible AI principles: https://www.microsoft.com/en-us/ai/principles-and-approach
-
 ## Run locally
 
 Requires Node.js 18 or newer.
@@ -36,20 +28,6 @@ npm start
 Open http://localhost:4173.
 
 No third-party packages are required for the local demo.
-
-## Demo flow
-
-1. Select **Civic rumor with fast spread**.
-2. Click **Analyze**.
-3. Show the four scores: content risk, amplification risk, coordination risk, and governance risk.
-4. Walk through the governance deliberation panel.
-5. Show alternative actions considered and why the selected option is least restrictive.
-6. Open the policy citations and point to Foundry IQ grounding.
-7. Close with the audit trail, rollback button, and idempotency controls.
-
-The strongest judge sentence:
-
-> Before unsafe amplification spreads, our reasoning agent assesses reach pressure, simulates coordination, retrieves grounded policy through Foundry IQ, deliberates over alternative actions, chooses the least restrictive effective intervention, and logs an auditable explanation.
 
 ## Architecture
 
@@ -145,31 +123,11 @@ The app sends:
 
 If live retrieval fails, the API falls back to the local synthetic corpus and returns a warning. For the final judge demo, show live retrieval working or clearly disclose local demo mode.
 
-## Explainable Scoring Heuristics & Weights
+## Explainability
 
-The reasoning agent does not rely on opaque deep learning model scores alone. Instead, it utilizes transparent, multi-dimensional heuristic models for amplification risk and coordination simulation. This allows every decision to be fully explainable and auditable.
+The platform uses transparent scoring models rather than opaque moderation decisions. Risk assessments are generated from multiple explainable signals including amplification pressure, coordination indicators, source uncertainty, engagement velocity, and topic sensitivity.
 
-### 1. Amplification Risk Weights
-
-The amplification risk score is computed as a weighted sum of six key indicators:
-
-*   **Engagement Velocity (28%):** *Rationale:* The rate of interaction (likes, shares, reports per minute) is the most critical operational predictor of propagation. High velocity requires rapid preventative mitigation.
-*   **Topic Sensitivity (20%):** *Rationale:* Critical civic areas (e.g., elections, public safety) have a disproportionately high risk of societal harm and viral misinformation.
-*   **Emotional Intensity (16%):** *Rationale:* Language with high emotional valence (e.g., urgency terms, calls to action) is psychologically proven to increase user sharing rates.
-*   **Novelty & Source Uncertainty (16%):** *Rationale:* Unverified claims or leaks lacking reliable citation sources have higher rumor-spread risk. Verified badges act as a negative modifier (safety boost).
-*   **Polarization Pressure (12%):** *Rationale:* Divisive us-vs-them language and report density indicate elevated conflict risk.
-*   **Network Reach (8%):** *Rationale:* Author follower count dictates baseline potential exposure, providing the initial audience reach scale.
-
-### 2. Coordination Simulation Weights
-
-The coordination score identifies potential inauthentic bot networks using six indicators:
-
-*   **Synchronized Engagement (22%):** *Rationale:* Coordinated bursts or programmatic metadata flags indicate automated/orchestrated network behavior.
-*   **Coordinated Timing & Phrasing (20%):** *Rationale:* Repeated phrases, identical timestamps, or lexicon markers (e.g., "mass report", "bot army").
-*   **Repost Density (18%):** *Rationale:* A highly skewed share-to-like ratio is a classic indicator of automated amplification script activity.
-*   **Follower Anomalies (16%):** *Rationale:* Brand-new or low-age accounts executing high-volume actions.
-*   **Engagement Spikes (16%):** *Rationale:* Sudden, non-linear surges in engagement metrics.
-*   **Report Pressure (8%):** *Rationale:* Community flagging signals indicating user-detected coordination.
+Detailed scoring methodology is available in docs/scoring-model.md.
 
 ## Safety design
 
@@ -180,6 +138,8 @@ The coordination score identifies potential inauthentic bot networks using six i
 - The agent uses least restrictive intervention first.
 - Every applied decision has an idempotency key and audit record.
 - The dashboard shows citations instead of hidden reasoning.
+
+## Limitations
 
 ## Limitations
 
