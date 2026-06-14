@@ -6,3 +6,5 @@
 5. Show alternative actions considered and why the selected option is least restrictive.
 6. Open the policy citations and point to Foundry IQ grounding.
 7. Close with the audit trail, rollback button, and idempotency controls.
+
+> Before unsafe amplification spreads, our reasoning agent assesses reach pressure, simulates coordination, retrieves grounded policy through Foundry IQ, deliberates over alternative actions, chooses the least restrictive effective intervention, and logs an auditable explanation.
