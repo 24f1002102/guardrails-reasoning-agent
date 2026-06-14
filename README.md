@@ -4,12 +4,16 @@ An agentic safety layer for social media platforms. It assesses unsafe amplifica
 
 This project is designed for the Microsoft Agents League Hackathon, Reasoning Agents track.
 
-## Why this can score well
+## Innovation Highlights
 
-- **Reasoning Agents:** the app does not stop at content classification. It runs a visible multi-step workflow: content signals, amplification risk, coordination simulation, policy retrieval, governance deliberation, alternative-action scoring, and enforcement.
-- **Foundry IQ:** the policy grounding layer follows the Foundry IQ pattern: multi-source knowledge evidence, extractive citations, role-aware retrieval metadata, and a live retrieval adapter for a configured knowledge base endpoint.
-- **Reliability and safety:** every action is idempotent, auditable, explainable, reversible when safe, and intentionally proportionate.
-- **Responsible AI framing:** the agent avoids binary censorship language. It prioritizes labels, friction, source requirements, throttling, and human review before removal.
+### Multi-Agent Governance
+Rather than producing a single moderation score, the system uses specialized agents to evaluate content risk, amplification pressure, coordination signals, policy grounding, governance outcomes, and enforcement actions.
+### Policy-Grounded Decisions
+Governance recommendations are supported by policy evidence and citations, enabling transparent and auditable decision making.
+### Least Restrictive Effective Action
+The platform prioritizes proportionate interventions such as context labels, source requirements, throttling, and human review before considering stronger enforcement actions.
+### Explainable Governance
+Every recommendation includes supporting evidence, alternative actions considered, and a complete audit trail for review and rollback.
 
 Official Microsoft references used for alignment:
 
