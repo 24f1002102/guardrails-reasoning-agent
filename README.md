@@ -5,8 +5,6 @@ Instead of asking only whether content is harmful, the system determines the lea
 
 This project is designed for the Microsoft Agents League Hackathon 2026, Reasoning Agents track.
 
-Imagine you're responsible for protecting 3 billion users. Would you delete this post, leave it alone, or do something in between? That's the decision our AI governance committee makes in under three seconds.
-
 ## Key Capabilities
 
 - Multi-agent governance workflow
