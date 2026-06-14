@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Media Guardrails Reasoning Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="mesh-background">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Microsoft Agents League - Reasoning Agents</p>
+        <h1>Social Media Guardrails Reasoning Agent</h1>
+      </div>
+      <div class="header-controls">
+        <div id="modeBadge" class="mode-badge mock-badge">LOCAL POLICY CORPUS</div>
+        <div class="role-selector-container">
+          <select id="roleSelector" class="role-select" aria-label="Current Session Role">
+            <option value="reviewer" selected>Role: Reviewer</option>
+            <option value="admin">Role: Admin</option>
+            <option value="user">Role: User</option>
+          </select>
+        </div>
+        <div class="header-metrics" aria-label="Hackathon scoring alignment">
+          <span>Foundry IQ</span>
+          <span>Governance deliberation</span>
+          <span>Safety audit</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel input-panel" aria-labelledby="input-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Scenario</p>
+            <h2 id="input-title">Post Intake</h2>
+          </div>
+          <button id="analyzeButton" class="primary-button" type="button">Analyze</button>
+        </div>
+
+        <label for="scenarioSelect">Demo scenario</label>
+        <select id="scenarioSelect"></select>
+
+        <label for="postText">Post text</label>
+        <textarea id="postText" rows="8"></textarea>
+
+        <div class="form-grid">
+          <label>
+            Topic
+            <select id="topic">
+              <option value="general">general</option>
+              <option value="election">election</option>
+              <option value="health">health</option>
+              <option value="public-safety">public-safety</option>
+              <option value="product">product</option>
+            </select>
+          </label>
+          <label>
+            Event window
+            <select id="eventWindow">
+              <option value="normal">normal</option>
+              <option value="active">active</option>
+            </select>
+          </label>
+          <label>
+            Followers
+            <input id="followerCount" type="number" min="0" step="100">
+          </label>
+          <label>
+            Account age days
+            <input id="accountAgeDays" type="number" min="0" step="1">
+          </label>
+          <label>
+            Likes
+            <input id="likes" type="number" min="0" step="10">
+          </label>
+          <label>
+            Shares
+            <input id="shares" type="number" min="0" step="10">
+          </label>
+          <label>
+            Replies
+            <input id="replies" type="number" min="0" step="10">
+          </label>
+          <label>
+            Reports
+            <input id="reports" type="number" min="0" step="1">
+          </label>
+          <label>
+            Minutes live
+            <input id="minutesSincePosted" type="number" min="1" step="1">
+          </label>
+          <div class="coord-signals-panel" id="coordSignalsPanel">
+            <span class="coord-signals-label">⚡ Detected Coordination Signals</span>
+            <div id="coordSignalsList" class="coord-signals-list">
+              <span class="coord-signal-empty">Enter metrics above to auto-detect signals</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel decision-panel" aria-labelledby="decision-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Decision intelligence</p>
+            <h2 id="decision-title">Guardrail Result</h2>
+          </div>
+          <span id="decisionPill" class="decision-pill">Waiting</span>
+        </div>
+
+        <div class="score-row">
+          <div>
+            <span class="score-label">Content Risk</span>
+            <strong id="contentScore">--</strong>
+            <span id="contentBand" class="score-band"></span>
+          </div>
+          <div>
+            <span class="score-label">Amplification Risk</span>
+            <strong id="amplificationScore">--</strong>
+            <span id="amplificationBand" class="score-band"></span>
+          </div>
+          <div>
+            <span class="score-label">Coordination Risk</span>
+            <strong id="coordinationScore">--</strong>
+            <span id="coordinationBand" class="score-band"></span>
+          </div>
+          <div>
+            <span class="score-label">Governance Risk</span>
+            <strong id="governanceScore">--</strong>
+            <span id="governanceBand" class="score-band"></span>
+          </div>
+        </div>
+
+        <p id="publicExplanation" class="decision-copy">
+          Choose a scenario and run the agent to see a policy-grounded action.
+        </p>
+
+        <div class="visual-grid">
+          <div>
+            <h3>Coordination Simulation</h3>
+            <canvas id="botCanvas" width="420" height="240" aria-label="Coordination simulation network"></canvas>
+            <div class="legend-grid" id="botLegend">
+              <span class="legend-item"><span class="legend-dot" style="background-color: #FF5C7A; box-shadow: 0 0 6px #FF5C7A;"></span>Coordinated Bot</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #3DD598; box-shadow: 0 0 6px #3DD598;"></span>Public Health Voice</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #FFB648; box-shadow: 0 0 6px #FFB648;"></span>Student Activist</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #7C5CFF; box-shadow: 0 0 6px #7C5CFF;"></span>Tech Professional</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #4F8CFF; box-shadow: 0 0 6px #4F8CFF;"></span>Local News Reader</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #94A3B8;"></span>General Audience</span>
+              <span class="legend-item"><span class="legend-dot" style="background-color: #475569;"></span>Inactive Profile</span>
+            </div>
+            <div id="botFactors" class="factor-list"></div>
+          </div>
+          <div>
+            <h3>Amplification Forecast</h3>
+            <canvas id="reachCanvas" width="420" height="240" aria-label="Amplification forecast chart"></canvas>
+            <div id="amplificationFactors" class="factor-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel governance-panel" aria-labelledby="governance-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Deliberation</p>
+            <h2 id="governance-title">Governance Deliberation</h2>
+          </div>
+          <div class="consensus-container">
+            <span class="consensus-label">CONSENSUS</span>
+            <div class="consensus-meter-wrapper">
+              <div id="consensusMeter" class="consensus-meter" style="width: 0%;"></div>
+            </div>
+            <strong id="consensusValue">0%</strong>
+          </div>
+        </div>
+        
+        <div id="boardroomGrid" class="boardroom-grid">
+          <!-- 6 Cards: Content, Amplification, Coordination, Policy, Governance, Enforcement -->
+          <article id="card-content" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Content Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for ingestion...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+          
+          <article id="card-amplification" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Amplification Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for velocity data...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+          
+          <article id="card-coordination" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Coordination Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for bot simulation...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+          
+          <article id="card-policy" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Policy Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for Foundry IQ...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+
+          <article id="card-governance" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Governance Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for deliberation...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+          
+          <article id="card-enforcement" class="boardroom-card state-pending">
+            <div class="card-header">
+              <h3>Enforcement Agent</h3>
+              <span class="card-status">PENDING</span>
+            </div>
+            <div class="card-body">
+              <p class="card-rec">Rec: --</p>
+              <p class="card-reason">Waiting for checks...</p>
+              <div class="card-meta">Confidence: --</div>
+            </div>
+          </article>
+        </div>
+
+        <div id="verdictBlock" class="verdict-block locked">
+          <h3>Boardroom Resolution</h3>
+          <p id="deliberationSummary" class="decision-copy">
+            Select a scenario and click Analyze to convene the board.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel alternatives-panel" aria-labelledby="alternatives-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Decision space</p>
+            <h2 id="alternatives-title">Alternative Actions Considered</h2>
+          </div>
+        </div>
+        <div id="alternatives" class="alternatives-list"></div>
+      </section>
+
+      <section class="panel timeline-panel" aria-labelledby="timeline-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Visible reasoning chain</p>
+            <h2 id="timeline-title">Agent Timeline</h2>
+          </div>
+        </div>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <section class="panel policy-panel" aria-labelledby="policy-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Foundry IQ grounding</p>
+            <h2 id="policy-title">Policy Citations</h2>
+          </div>
+          <span id="retrievalMode" class="mode-pill">local-policy-corpus</span>
+        </div>
+        <div id="citations" class="citations"></div>
+      </section>
+
+      <section class="panel audit-panel" aria-labelledby="audit-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Reliability and safety</p>
+            <h2 id="audit-title">Audit Trail</h2>
+          </div>
+          <button id="refreshAudit" class="secondary-button" type="button">Refresh</button>
+        </div>
+        <div id="auditList" class="audit-list"></div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

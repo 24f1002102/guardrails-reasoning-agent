@@ -1,0 +1,23 @@
+{
+  "name": "social-media-guardrails-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reasoning agent demo for policy-grounded social media safety guardrails using a Foundry IQ style knowledge layer.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "microsoft-foundry",
+    "foundry-iq",
+    "reasoning-agents",
+    "guardrails",
+    "hackathon"
+  ],
+  "license": "MIT"
+}
