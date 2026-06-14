@@ -5,6 +5,15 @@ Instead of asking only whether content is harmful, the system determines the lea
 
 This project is designed for the Microsoft Agents League Hackathon 2026, Reasoning Agents track.
 
+## Key Capabilities
+
+- Multi-agent governance workflow
+- Policy-grounded decision making
+- Least restrictive effective intervention
+- Alternative-action deliberation
+- Explainable enforcement decisions
+- Audit trail and rollback support
+
 ## Innovation Highlights
 
 ### Multi-Agent Governance
