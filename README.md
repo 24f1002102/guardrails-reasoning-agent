@@ -1,8 +1,9 @@
 # Social Media Guardrails Reasoning Agent
 
-An agentic safety layer for social media platforms. It assesses unsafe amplification risk, simulates coordinated behavior, retrieves policy evidence through a Foundry IQ style knowledge layer, deliberates over alternative actions, and applies the least restrictive effective guardrail with citations and an audit trail.
+Social Media Guardrails Committee is a multi-agent governance system that helps platforms make transparent, policy-grounded moderation decisions.
+Instead of asking only whether content is harmful, the system determines the least restrictive effective intervention by combining content analysis, amplification risk assessment, coordination detection, policy retrieval, governance deliberation, and auditable enforcement. An agentic safety layer for social media platforms. It assesses unsafe amplification risk, simulates coordinated behavior, retrieves policy evidence through a Foundry IQ style knowledge layer, deliberates over alternative actions, and applies the least restrictive effective guardrail with citations and an audit trail.
 
-This project is designed for the Microsoft Agents League Hackathon, Reasoning Agents track.
+This project is designed for the Microsoft Agents League Hackathon 2026, Reasoning Agents track.
 
 ## Innovation Highlights
 
