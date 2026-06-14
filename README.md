@@ -141,8 +141,6 @@ Detailed scoring methodology is available in docs/scoring-model.md.
 
 ## Limitations
 
-## Limitations
-
 - The amplification risk model is a transparent heuristic for demo purposes, not a production prediction system.
 - The coordination simulation is a risk model, not a forensic attribution engine.
 - The local policy corpus is synthetic. Use real Foundry IQ policy sources for official submission.
